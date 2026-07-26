@@ -1,5 +1,52 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+
+const slotSchema = new mongoose.Schema({
+  slotNumber: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 8
+  },
+  purchaseDate: {
+    type: Date,
+    default: Date.now
+  },
+  income: {
+    type: Number,
+    default: 0
+  },
+  mpsFoundationBalance: {
+    type: Number,
+    default: 0
+  },
+  royaltyBalance: {
+    type: Number,
+    default: 0
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  }
+});
+
+const incomeHistorySchema = new mongoose.Schema({
+  level: {
+    type: Number,
+    min: 1,
+    max: 8
+  },
+  amount: Number,
+  incomeType: {
+    type: String,
+    enum: ['commission', 'mps_foundation', 'royalty']
+  },
+  fromUser: Number,
+  fromWallet: String,
+  timestamp: {
+    type: Date,
+    default: Date.now
+  }
+});
 
 const userSchema = new mongoose.Schema({
   userId: {
@@ -42,13 +89,8 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  activeSlots: [
-    {
-      slotNumber: Number,
-      purchaseDate: Date,
-      income: Number
-    }
-  ],
+  activeSlots: [slotSchema],
+  incomeHistory: [incomeHistorySchema],
   nexaSalary: {
     type: Number,
     default: 0
