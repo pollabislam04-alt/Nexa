@@ -1,0 +1,16 @@
+{
+  "name": "nexa-space",
+  "version": "1.0.0",
+  "description": "Web3 MLM Dapp on BNB Chain",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": ["web3", "dapp", "mlm", "bnb", "blockchain"],
+  "author": "Nexa Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
